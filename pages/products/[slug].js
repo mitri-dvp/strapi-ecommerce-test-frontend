@@ -58,8 +58,8 @@ const Product = ({ product }) => {
   return (
     <div className={styles.wrapper}>
       <Head>        
-        <meta http-equiv="Content-Type" content="text/html"/>
-        <meta charset="UTF-8"/>
+        <meta httpEquiv="Content-Type" content="text/html"/>
+        <meta charSet="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <title>{`${product.title} - ${BRAND_NAME}`}</title>
         {product.meta_description &&
