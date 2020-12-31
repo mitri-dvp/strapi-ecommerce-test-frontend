@@ -1,0 +1,58 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Roboto:wght@300;400&display=swap');
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Lato', sans-serif, 'Segoe UI';
+  margin: 0 auto;
+  color: #333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+footer {
+  text-align: center;
+}
+
+content {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: 
+  auto 1fr auto;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.view {
+  padding: 2rem 5rem;
+}
+
+.spinner {
+  background-image: url('/spinner.gif');
+  display: block;
+  margin: 0 auto;
+  height: 10rem;
+  width: 10rem;
+  background-size: cover;
+  background-position: center;
+}

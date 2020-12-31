@@ -1,0 +1,28 @@
+.nav {
+  height: 5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  border-bottom: 0.1rem solid #00000030;
+  padding: 0 5rem;
+}
+
+.title {
+  text-align: center;
+  width: auto;
+  line-height: 1.5rem;
+  font-weight: normal;
+}
+.title h1 {
+  font-weight: normal;
+  /* text-transform: uppercase; */
+}
+
+
+.back {
+  margin-right: auto;
+}
+
+.auth {
+  margin-left: auto;
+}

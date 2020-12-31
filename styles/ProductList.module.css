@@ -1,0 +1,43 @@
+.wrapper {
+  max-width: 60rem;
+  margin: 0 auto;
+}
+
+.products_wrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+}
+
+
+.product_item {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: normal;
+}
+
+.product_img {
+  min-height: 10rem;
+  margin-bottom: auto;
+}
+
+.product_title {
+  font-size: 1.1rem;
+  line-height: 2rem;
+}
+
+.product_item:hover {
+  opacity: 0.9;
+}
+
+.product_item:hover .product_title {
+  text-decoration: underline;
+}

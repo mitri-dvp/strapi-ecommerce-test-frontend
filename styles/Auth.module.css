@@ -1,0 +1,31 @@
+.login {
+  width: 100%;
+  background-color:#fff;display:inline-flex;align-items:center;color:rgba(0, 0, 0, .54);box-shadow:0 2px 2px 0 rgba(0, 0, 0, .24), 0 0 1px 0 rgba(0, 0, 0, .24);padding:0;border-radius:2px;border:1px solid transparent;font-size:14px;font-weight:500;font-family:Roboto, sans-serif;opacity:0.9;
+  cursor:pointer;
+}
+
+.logout {
+  background-color:#fff;display:inline-flex;align-items:center;color:rgba(0, 0, 0, .54);box-shadow:0 2px 2px 0 rgba(0, 0, 0, .24), 0 0 1px 0 rgba(0, 0, 0, .24);padding:0;border-radius:2px;border:1px solid transparent;font-size:14px;font-weight:500;font-family:Roboto, sans-serif;opacity:0.9;
+  cursor:pointer;
+  padding: 0.5rem 1rem;
+}
+
+.logout:active {
+  background-color:#eeeeee;
+  opacity:1;
+  cursor:pointer;
+}
+.login:active {
+  background-color:#eeeeee;display:inline-flex;align-items:center;color:rgba(0, 0, 0, .54);box-shadow:0 2px 2px 0 rgba(0, 0, 0, .24), 0 0 1px 0 rgba(0, 0, 0, .24);padding:0;border-radius:2px;border:1px solid transparent;font-size:14px;font-weight:500;font-family:Roboto, sans-serif;opacity:1;
+  cursor:pointer;
+}
+.login:active .login_div {
+  background-color:#eeeeee;
+}
+
+.login_div {
+  margin-right:10px;background:#fff;padding:10px;border-radius:2px
+}
+.login_span {
+  padding-right:10px;font-weight:500;padding-left:0;padding-top:10px;padding-bottom:10px
+}

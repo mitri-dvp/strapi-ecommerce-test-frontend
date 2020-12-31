@@ -1,0 +1,44 @@
+import styles from '../styles/Checkout.module.css'
+import Head from 'next/head'
+import AuthContext from '../context/AuthContext'
+
+import { useContext, useState, useEffect } from 'react'
+import { fromImgToUrl, API_URL, BRAND_NAME } from '../utils/urls'
+import { formatPrice } from '../utils/format' 
+import StripeButton from '../components/StripeButton'
+
+export default function Login() {
+
+  const { product } = useContext(AuthContext)
+
+  return (
+    <>
+      <Head>        
+        <meta httpEquiv="Content-Type" content="text/html"/>
+        <meta charSet="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Checkout - {BRAND_NAME}</title>
+        <meta name="description" content="Login into mitri.dvp for free." />
+      </Head>
+
+      <h2 className={styles.title}>Checkout</h2>
+
+      <div className={styles.preview}>
+        {product ?
+        <>
+          <div className={styles.product_img_wrapper}>
+            <img src={fromImgToUrl(product.image)}/>
+          </div>
+          <h3 className={styles.product_title}>{product.title}</h3>
+          <p className={styles.product_price}><b>${formatPrice(product.price)}</b></p>
+          <StripeButton product={product}/>
+        </>
+        : 
+        <>
+          <p>Please choose a product.</p>
+        </>}
+      </div>
+
+    </>
+  )
+}
