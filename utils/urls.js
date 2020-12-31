@@ -2,9 +2,10 @@ export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:1337
 // export const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || 'http://localhost:1337'
 
 export const STRIPE_PK = process.env.NEXT_PUBLIC_STRIPE_PK || 'pk_test_d3oAiUF60EUPKG4NRvriNmGw00yhvTmZeh'
+
 export const PAYPAL_CLIENT = process.env.NEXT_PUBLIC_PAYPAL_CLIENT || 'AWETv4d6VsZPyIwzUER8gKkcqFMcnd_mV9aSYcgzOR25NO78wGV8veG0fti1uDsBrGyihVsnzazqyR6Q'
 
-export const BRAND_NAME = 'Online Shop'
+export const BRAND_NAME = process.env.NEXT_PUBLIC_BRAND_NAME || 'Online Shop'
 
 /**
  * Given an img retuns the Url
