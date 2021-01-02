@@ -49,6 +49,7 @@
 .back a span {
   margin-left: 0.5rem;
   margin-bottom: 0.1rem;
+  align-self: center;
 }
 
 .back img {
