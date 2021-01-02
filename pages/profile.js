@@ -41,8 +41,6 @@ export default function Profile() {
   // Custom Hook
   const { orders, loading } = useOrders(user, getToken)
 
-  console.log('Account.render Orders: ', orders)
-
   if(!user) {
     return (
       <div>
@@ -69,7 +67,6 @@ export default function Profile() {
 
       <h3 className={styles.sub_title}>Your Orders</h3>
 
-      {loading && <div className='spinner'></div>}
       
       <table className={styles.table}>
         <thead>
@@ -79,6 +76,7 @@ export default function Profile() {
           <th>Total</th>
           <th>Status</th>
         </thead>
+
 
         {orders.map(order => (
           <tbody key={order.id}>
@@ -90,6 +88,8 @@ export default function Profile() {
           </tbody>
         ))}
       </table>
+
+      {loading && <div className='spinner'></div>}
 
       <div className={styles.login_providers}>
         <GoogleLogoutBtn/>
