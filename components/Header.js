@@ -21,12 +21,26 @@ export default function Header() {
   <div className={styles.nav}>
     
     <div className={isHome ? 'hidden' : styles.back}>
-      <a href="#" onClick={goBack}> {'<'} Back</a>
+      <a href="#" onClick={goBack}>
+        <img src="/arrow-left-circle.svg" alt=""/>
+        <span>Back</span>
+      </a>
     </div>
+
+    {/* <div className={isHome ? 'hidden' : styles.back}>
+      <a href="#" onClick={goBack}> {'<'} Back</a>
+    </div> */}
+
+    {/* <div className={styles.brand_logo}>
+      <Link href='/'>
+      <a> <img src="/brand-logo.png" alt=""/> </a>
+      </Link>
+    </div> */}
 
     <div className={styles.title}>
       <Link href='/'>
       <a>
+        <img src="/brand-logo.png" alt=""/>
         <h1>
           Online Shop
         </h1>
@@ -36,17 +50,17 @@ export default function Header() {
 
     <div className={styles.auth}>
       {user ?
-      (<div>
+      (
         <Link href="/profile">
-          <a>{user.email}</a>
+          <a> <img src="/person-circle.svg" alt=""/> </a>
         </Link>
-      </div>)
+      )
       :
-      (<div>
+      (
         <Link href="/login">
           <a>Log in</a>
         </Link>
-      </div>)
+      )
       }
     </div>
   </div>

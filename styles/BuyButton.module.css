@@ -1,17 +1,17 @@
 .buy {
   width: 100%;
   padding: 1rem 2rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   letter-spacing: 1px;
   background-color: transparent;
-  border: 0.1rem solid #333;
+  border: 1px solid #e67e22;
+  color: #e67e22;
   border-radius: 0.1rem;
-  color: inherit;
   cursor: pointer;
   text-transform: uppercase;
-  opacity: 0.8;
+  opacity: 1;
 }
 
 .buy:hover {
-opacity: 1;
+opacity: 0.8;
 }

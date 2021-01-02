@@ -4,6 +4,24 @@
   text-align: center;
   margin-bottom: 2rem;
   font-weight: normal;
+  position: relative;
+}
+
+.title::after, .title::before {
+  content: '';
+  display: block;
+  width: 5rem;
+  height: 0.1rem;
+  background-color: #e67e22;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-240%) translateY(-50%);
+}
+
+.title::after {
+  transform: translateX(140%) translateY(-50%);
+
 }
 
 .sub_title {
@@ -12,49 +30,65 @@
   margin-bottom: 2rem;
   font-weight: normal;
 }
-
-.orders_list {
-  overflow: hidden;
-  border-radius: 0.15rem;
+.sub_title span {
+  text-transform: none;
 }
 
-.orders_list > div {
-  display: grid;
-  grid-template-columns: 0.5fr 0.2fr 1.5fr 1fr 1fr;
-  gap: 1rem;
+.table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.orders_list > div:nth-child(odd) {
+.table thead {
+  background-color: #e67e22;
+  color: #fff;
+
+}
+
+.table thead {
+  width: max-content;
+}
+.table body {
+  width: max-content;
+}
+
+.table thead th{
+  padding: 1em;
+  text-transform: uppercase;
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+.table tbody td{
+  padding: 1em;
+  margin: 0.5em;
+}
+
+.table tbody:nth-child(odd) {
   background-color: #f4f4f4;
+
 }
 
-.orders_list > div:first-child {
-  background-color: #333;
-  color: #f4f4f4;
-}
-
-.orders_list > div > * {
-  margin: 0.5rem 0;
-  padding: 0.5rem 1rem;
-}
 .paid, .unpaid {
   width: max-content;
-  border-radius: 0.1rem;
+  border-radius: 0.1em;
   display: flex;
   align-items: center;
+  padding: 0.5em 1em!important;
 }
 
 .paid {
   color: #00b894;
   background-color: #55efc430;
-  border: 0.1rem solid #00b894;
+  border: 0.1em solid #00b894;
   width: max-content;
 }
 
 .unpaid {
   color: #d63031;
   background-color: #ff767530;
-  border: 0.1rem solid #d63031;
+  border: 0.1em solid #d63031;
   width: max-content;
 }
 
@@ -62,4 +96,16 @@
   width: max-content;
   padding: 2rem;
   margin: 0 auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .table {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .table {
+    font-size: 10px;
+  }
 }

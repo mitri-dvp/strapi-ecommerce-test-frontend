@@ -63,30 +63,33 @@ export default function Profile() {
 
       <h2 className={styles.title}>Profile Page</h2>
 
+      {user && 
+        <h3 className={styles.sub_title}>Welcome: <span>{user.email}</span></h3>
+      }
+
       <h3 className={styles.sub_title}>Your Orders</h3>
 
       {loading && <div className='spinner'></div>}
       
-      <div className={styles.orders_list}>
-
-        <div>
-          <p>Date</p>
-          <p>ID</p>
-          <p>Title</p>
-          <p>Total</p>
-          <p>Status</p>
-        </div>
+      <table className={styles.table}>
+        <thead>
+          <th>Date</th>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Total</th>
+          <th>Status</th>
+        </thead>
 
         {orders.map(order => (
-          <div key={order.id}>
-            <p>{new Date(order.created_at).toLocaleDateString('en-US')}</p>
-            <p>{order.id}</p>
-            <p>{order.product.title}</p>
-            <p>${order.total}</p>
-            <p className={styles[order.status]}>{order.status}</p>
-          </div>
+          <tbody key={order.id}>
+            <td>{new Date(order.created_at).toLocaleDateString('en-US')}</td>
+            <td>{order.id}</td>
+            <td>{order.product.title}</td>
+            <td>${order.total}</td>
+            <td className={styles[order.status]}>{order.status}</td>
+          </tbody>
         ))}
-      </div>
+      </table>
 
       <div className={styles.login_providers}>
         <GoogleLogoutBtn/>

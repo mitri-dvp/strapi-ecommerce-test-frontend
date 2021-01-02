@@ -16,7 +16,12 @@
 }
 
 .product_title {
-  font-size: 2.2rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: solid #e67e22 0.2rem;
+  width: max-content;
+  padding-bottom: 0.5rem;
 }
 
 .product_price {
@@ -57,5 +62,8 @@ opacity: 1;
 @media only screen and (max-width: 600px) {
   .payment_options {
   grid-template-columns: 1fr;
+  }
+  .wrapper {
+    padding: 0;
   }
 }
