@@ -62,7 +62,7 @@ const Product = ({ product }) => {
         <meta charSet="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="icon" href="/brand-logo.png" />
-        <title>{`${product.title} - ${BRAND_NAME}`}</title>
+        <title>{`${product.title} | ${BRAND_NAME}`}</title>
         {product.meta_description &&
           <meta name="description" content={product.meta_description} />
         }

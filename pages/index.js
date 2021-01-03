@@ -7,7 +7,7 @@ export default function Home({products}) {
   return (
     <>
       <Head>
-        <title>Home - {BRAND_NAME}</title>
+        <title>Home | {BRAND_NAME}</title>
         <link rel="icon" href="/brand-logo.png" />
         <meta httpEquiv="Content-Type" content="text/html"/>
         <meta charSet="UTF-8"/>

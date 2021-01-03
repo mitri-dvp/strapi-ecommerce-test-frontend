@@ -57,7 +57,7 @@ export default function Profile() {
         <meta charSet="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <link rel="icon" href="/brand-logo.png" />
-        <title>Profile - {BRAND_NAME}</title>
+        <title>Profile | {BRAND_NAME}</title>
         <meta name="description" content={`The profile page, view your orders and logout from ${BRAND_NAME}.`} />
       </Head>
 
