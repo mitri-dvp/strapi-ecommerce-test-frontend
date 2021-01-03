@@ -2,7 +2,8 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
   font-weight: normal;
   position: relative;
 }
@@ -21,7 +22,6 @@
 
 .title::after {
   transform: translateX(140%) translateY(-50%);
-
 }
 
 .sub_title {
@@ -34,78 +34,8 @@
   text-transform: none;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.table thead {
-  background-color: #e67e22;
-  color: #fff;
-
-}
-
-.table thead {
-  width: max-content;
-}
-.table body {
-  width: max-content;
-}
-
-.table thead th{
-  padding: 1em;
-  text-transform: uppercase;
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle;
-}
-
-.table tbody td{
-  padding: 1em;
-  margin: 0.5em;
-}
-
-.table tbody:nth-child(odd) {
-  background-color: #f4f4f4;
-
-}
-
-.paid, .unpaid {
-  width: max-content;
-  border-radius: 0.1em;
-  display: flex;
-  align-items: center;
-  padding: 0.5em 1em!important;
-}
-
-.paid {
-  color: #00b894;
-  background-color: #55efc430;
-  border: 0.1em solid #00b894;
-  width: max-content;
-}
-
-.unpaid {
-  color: #d63031;
-  background-color: #ff767530;
-  border: 0.1em solid #d63031;
-  width: max-content;
-}
-
 .login_providers {
   width: max-content;
   padding: 2rem;
   margin: 0 auto;
-}
-
-@media only screen and (max-width: 600px) {
-  .table {
-    font-size: 12px;
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  .table {
-    font-size: 10px;
-  }
 }

@@ -1,14 +1,13 @@
 .wrapper {
-  max-width: 60rem;
+  max-width: 65rem;
   margin: 0 auto;
 }
 
 .products_wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  gap: 1rem;
+  gap: 2rem;
 }
-
 
 .product_item {
   height: 100%;
@@ -20,7 +19,8 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
   font-weight: normal;
   position: relative;
 }

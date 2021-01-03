@@ -48,6 +48,7 @@ export default function success() {
   return (
     <div>
       <Head>
+        <link rel="icon" href="/brand-logo.png" />
         <title>Thank you for your purchase</title>
         <meta name="description" content="Thank you for your purchase"/>
       </Head>

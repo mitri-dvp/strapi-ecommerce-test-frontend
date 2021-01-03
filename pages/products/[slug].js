@@ -20,25 +20,25 @@ const Product = ({ product }) => {
   }
   
   function zoomIn(e) {
-    const magArea = document.getElementById('product-img-wrapper')
-    const magImg = magArea.children[0]
-    let clientX = e.clientX - magArea.offsetLeft
-    let clientY = e.clientY - magArea.offsetTop
+    const imgWrapper = document.getElementById('product-img-wrapper')
+    const img = imgWrapper.children[0]
+    let clientX = e.clientX - imgWrapper.offsetLeft
+    let clientY = e.clientY - imgWrapper.offsetTop
 
-    let mWidht = magArea.offsetWidth
-    let mHeigh = magArea.offsetHeight
+    let mWidht = imgWrapper.offsetWidth
+    let mHeigh = imgWrapper.offsetHeight
 
     clientX= ((clientX / mWidht * 100) - 50)*-1
     clientY= ((clientY / mHeigh * 100) - 50)*-1
     console.log(clientX, clientY)
 
-    magImg.style.transform = `translate(${clientX}%, ${clientY}%) scale(2)`
+    img.style.transform = `translate(${clientX}%, ${clientY}%) scale(2)`
   }
 
   function onMouseOut() {
-    const magArea = document.getElementById('product-img-wrapper')
-    const magImg = magArea.children[0]
-    magImg.style.transform = `translate(-${0}%, -${0}%) scale(1)`
+    const imgWrapper = document.getElementById('product-img-wrapper')
+    const img = imgWrapper.children[0]
+    img.style.transform = `translate(-${0}%, -${0}%) scale(1)`
   }
 
   function throttled(delay, fn) {
@@ -61,6 +61,7 @@ const Product = ({ product }) => {
         <meta httpEquiv="Content-Type" content="text/html"/>
         <meta charSet="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="icon" href="/brand-logo.png" />
         <title>{`${product.title} - ${BRAND_NAME}`}</title>
         {product.meta_description &&
           <meta name="description" content={product.meta_description} />

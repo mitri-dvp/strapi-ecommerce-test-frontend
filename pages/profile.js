@@ -1,6 +1,7 @@
 import styles from '../styles/Profile.module.css'
 import Head from 'next/head'
 import AuthContext from '../context/AuthContext'
+import OrderList from '../components/OrderList'
 
 import { useContext, useState, useEffect } from 'react'
 import { API_URL, BRAND_NAME } from '../utils/urls'
@@ -55,8 +56,9 @@ export default function Profile() {
         <meta httpEquiv="Content-Type" content="text/html"/>
         <meta charSet="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="icon" href="/brand-logo.png" />
         <title>Profile - {BRAND_NAME}</title>
-        <meta name="description" content="The account page, view your orders and logout from mitri.dvp." />
+        <meta name="description" content={`The profile page, view your orders and logout from ${BRAND_NAME}.`} />
       </Head>
 
       <h2 className={styles.title}>Profile Page</h2>
@@ -67,27 +69,7 @@ export default function Profile() {
 
       <h3 className={styles.sub_title}>Your Orders</h3>
 
-      
-      <table className={styles.table}>
-        <thead>
-          <th>Date</th>
-          <th>ID</th>
-          <th>Title</th>
-          <th>Total</th>
-          <th>Status</th>
-        </thead>
-
-
-        {orders.map(order => (
-          <tbody key={order.id}>
-            <td>{new Date(order.created_at).toLocaleDateString('en-US')}</td>
-            <td>{order.id}</td>
-            <td>{order.product.title}</td>
-            <td>${order.total}</td>
-            <td className={styles[order.status]}>{order.status}</td>
-          </tbody>
-        ))}
-      </table>
+      <OrderList orders={orders}/>
 
       {loading && <div className='spinner'></div>}
 

@@ -4,6 +4,8 @@
   justify-content: center;
   align-items: center;
   height: 4rem;
+  color: #f4f4f4;
+  background-color: #333;
 }
 
 .logo {

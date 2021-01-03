@@ -17,8 +17,9 @@ export default function Login() {
         <meta httpEquiv="Content-Type" content="text/html"/>
         <meta charSet="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="icon" href="/brand-logo.png" />
         <title>Login - {BRAND_NAME}</title>
-        <meta name="description" content="Login into mitri.dvp for free." />
+        <meta name="description" content={`Login into ${BRAND_NAME} for free.`} />
       </Head>
 
       <h2 className={styles.title}>Log in</h2>

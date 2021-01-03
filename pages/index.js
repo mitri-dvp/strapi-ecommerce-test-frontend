@@ -8,7 +8,7 @@ export default function Home({products}) {
     <>
       <Head>
         <title>Home - {BRAND_NAME}</title>
-        <link rel="icon" href="/mitri-logo.png" />
+        <link rel="icon" href="/brand-logo.png" />
         <meta httpEquiv="Content-Type" content="text/html"/>
         <meta charSet="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
