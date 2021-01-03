@@ -1,6 +1,7 @@
 .wrapper {
   max-width: 65rem;
   margin: 0 auto;
+  margin-bottom: 4rem;
 }
 
 .products_wrapper {
