@@ -10,7 +10,7 @@ import BuyButton from '../components/BuyButton'
 import PaypalButton from '../components/PaypalButton'
 import CartCheckout from '../components/CartCheckout'
 
-
+// PROBLEM
 
 import AuthContext from '../context/AuthContext'
 

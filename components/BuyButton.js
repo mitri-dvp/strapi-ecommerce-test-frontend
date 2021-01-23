@@ -17,6 +17,9 @@ export default function BuyButton() {
   const handleBuy = async () => {
     if(loading) return
     setLoading(true)
+
+    console.log(products, total)
+
     const stripe = await stripePromise
     const token = await getToken()
 

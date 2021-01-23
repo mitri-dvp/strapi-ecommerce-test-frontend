@@ -37,6 +37,7 @@ export const CartProvider = (props) => {
 
   const removeFromProducts = (product) => {
     setProducts(products.filter(e => e.id != product.id))
+    updateCartValues() // Fix????
     return
   };
 
