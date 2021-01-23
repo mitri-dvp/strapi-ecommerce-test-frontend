@@ -3,22 +3,16 @@ import { useRouter } from 'next/router'
 import { formatPrice } from '../../utils/format'
 import { fromImgToUrl, API_URL, BRAND_NAME } from '../../utils/urls'
 
-import styles from '../../styles/Product.module.css'
 import Head from 'next/head'
-import BuyButton from '../../components/BuyButton'
-import PaypalButton from '../../components/PaypalButton'
+import styles from '../../styles/Product.module.css'
+import viewStyles from '../../styles/View.module.css'
+import Header from '../../components/Header'
 
-import AuthContext from '../../context/AuthContext'
+import CartContext from '../../context/CartContext'
 
-const Product = ({ product }) => {
-  const { user } = useContext(AuthContext);
+const Product = ({ product, categories }) => {
+  const { addToProducts, isInsideCart } = useContext(CartContext);
 
-  const router = useRouter()
-
-  const redirectToLogin = () => {
-    router.push('/login')
-  }
-  
   function zoomIn(e) {
     const imgWrapper = document.getElementById('product-img-wrapper')
     const img = imgWrapper.children[0]
@@ -30,7 +24,6 @@ const Product = ({ product }) => {
 
     clientX= ((clientX / mWidht * 100) - 50)*-1
     clientY= ((clientY / mHeigh * 100) - 50)*-1
-    console.log(clientX, clientY)
 
     img.style.transform = `translate(${clientX}%, ${clientY}%) scale(2)`
   }
@@ -56,8 +49,8 @@ const Product = ({ product }) => {
   const onMouseMove = throttled(10, zoomIn);
 
   return (
-    <div className={styles.wrapper}>
-      <Head>        
+    <>
+      <Head>
         <meta httpEquiv="Content-Type" content="text/html"/>
         <meta charSet="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -67,31 +60,30 @@ const Product = ({ product }) => {
           <meta name="description" content={product.meta_description} />
         }
       </Head>
-      <div>
-        <div id={'product-img-wrapper'} onMouseMove={onMouseMove} onMouseOut={onMouseOut} className={styles.product_img_wrapper}>
-          <img src={fromImgToUrl(product.image)}/>
-        </div>
-      </div>
-      <div>
-        <h3 className={styles.product_title}>{product.title}</h3>
-        <p className={styles.product_price}><b>${formatPrice(product.price)}</b></p>
-        <p className={styles.product_description}>
-          {product.description}
-        </p>
-        {!user &&
-          <button className={styles.buy} onClick={redirectToLogin}>
-            Login to Buy
-          </button>
-        }
-        {user &&
-          <div className={styles.payment_options}>
-            <BuyButton product={product}/>
-            <PaypalButton product={product}/>
+      <Header categories={categories}/>
+      <div className={viewStyles.view}>
+        <div className={styles.wrapper}>
+        <div>
+          <div id={'product-img-wrapper'} onMouseMove={onMouseMove} onMouseOut={onMouseOut} className={styles.product_img_wrapper}>
+            <img src={fromImgToUrl(product.image)}/>
           </div>
-        }
-      </div>
+        </div>
+        <div>
+          <h3 className={styles.product_title}>{product.title}</h3>
+          <p className={styles.product_price}><b>${formatPrice(product.price)}</b></p>
+          <p className={styles.product_description}>
+            {product.description}
+          </p>
 
-    </div>
+          <button className={styles.button} onClick={() => {addToProducts(product)}}>
+            {isInsideCart(product) ? 'Open Cart' : 'Add To Cart'}
+          </button>
+
+        </div>
+
+      </div>
+      </div>
+    </>
   )
 }
 
@@ -99,11 +91,14 @@ export async function getStaticProps({params: {slug}}) {
     // Retrieve all possible paths
     const product_res = await fetch(`${API_URL}/products/?slug=${slug}`)
     const found = await product_res.json()
+    const categories_res = await fetch(`${API_URL}/categories/`)
+    const categories = await categories_res.json()
   
     // Return to NextJS context
     return  {
       props: {
-        product: found[0] // Using a query will result in returning an array
+        product: found[0], // Using a query will result in returning an array
+        categories,
       }
     }
 }

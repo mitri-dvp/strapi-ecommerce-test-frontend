@@ -1,24 +1,28 @@
 import '../styles/globals.css'
-import Header from '../components/Header'
 import Footer from '../components/Footer'
 import PoweredBy from '../components/PoweredBy'
+import Cart from '../components/Cart'
+
 
 import { AuthProvider } from '../context/AuthContext'
+import { CartProvider } from '../context/CartContext'
+
 
 function MyApp({ Component, pageProps }) {
+  
   return (
+    <CartProvider>
     <AuthProvider>
       <content>
-        <Header />
         <div>
-          <div className={'view'}>
           <Component {...pageProps} />
-          </div>
         </div>
         <Footer/>
         <PoweredBy/>
+        <Cart/>
       </content>
     </AuthProvider>
+    </CartProvider>
   )
 }
 

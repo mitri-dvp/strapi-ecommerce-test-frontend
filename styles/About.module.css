@@ -1,0 +1,38 @@
+.wrapper {
+  max-width: 40rem;
+  margin: auto;
+}
+.image_wrapper {
+  margin-top: 2rem;
+}
+
+.title {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
+  font-weight: normal;
+  position: relative;
+}
+
+.title::after, .title::before {
+  content: '';
+  display: block;
+  width: 5rem;
+  height: 0.1rem;
+  background-color: #e67e22;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-225%) translateY(-50%);
+}
+
+.title::after {
+  transform: translateX(125%) translateY(-50%);
+
+}
+
+@media only screen and (max-width: 600px) {
+
+}

@@ -1,16 +1,15 @@
-.wrapper {
-}
-
 .title {
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 4rem;
   margin-bottom: 4rem;
   font-weight: normal;
   position: relative;
 }
-
+.margin-top {
+  margin-top: 4rem;
+}
 .title::after, .title::before {
   content: '';
   display: block;
@@ -22,11 +21,9 @@
   top: 50%;
   transform: translateX(-200%) translateY(-50%);
 }
-
 .title::after {
   transform: translateX(100%) translateY(-50%);
 }
-
 
 .login_providers {
   width: max-content;

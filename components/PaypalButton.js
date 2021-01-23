@@ -1,27 +1,36 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { API_URL } from '../utils/urls'
 
 import styles from '../styles/PaypalButton.module.css';
 import AuthContext from '../context/AuthContext'
-import { API_URL } from '../utils/urls'
+import CartContext from '../context/CartContext'
 
+export default function PaypalButton() {
+  const [loading, setLoading] = useState(false)
 
-export default function PaypalButton({ product }) {
   const { getToken } = useContext(AuthContext); 
-
+  const { products, total } = useContext(CartContext); 
+  
   const handleBuy = async () => {
+    if(loading) return
+    setLoading(true)
     const token = await getToken()
+    
+    console.log(products, total)
 
     const res = await fetch(`${API_URL}/orders?provider=paypal`, {
       method: 'POST',
-      body: JSON.stringify({ product }),
+      body: JSON.stringify({ products, total: +total.toFixed(2) }),
       headers: {
         'Content-type': `application/json`,
         'Authorization': `Bearer ${token}`,
       }
     })
-    const approveURL = await res.text();
+    const {link, transactions} = await res.json();
 
-    window.location = approveURL
+    sessionStorage.setItem('PayPalTransactions', JSON.stringify(transactions))
+
+    window.location = link
   }
 
   return (

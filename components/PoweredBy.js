@@ -5,7 +5,7 @@ export default function PoweredBy() {
     <>
       <a href="#" className={styles.powered_by}>
         <p>powered by</p>
-        <img src="/mitri-logo.png" alt="mitri.dvp" srcset=""/>
+        <img src="/mitri-logo.png" alt="mitri.dvp"/>
         <p>mitri.dvp</p>
       </a>
     </>

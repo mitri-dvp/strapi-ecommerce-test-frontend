@@ -1,0 +1,16 @@
+.view {
+  /* margin-top: 9rem; */
+  padding: 0 5rem;
+  max-width: 100%;
+  min-height: 70vh;
+}
+.view > div > p{
+  margin-top: 4rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .view {
+    padding: 0 2rem;
+    min-height: 90vh;
+  }
+}

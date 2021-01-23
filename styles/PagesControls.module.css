@@ -1,0 +1,27 @@
+.wrapper button {
+  font-size: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border: 0;
+  background: #fff;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+.wrapper button:hover {
+  opacity: 0.7;
+}
+.wrapper button.active {
+  color: #f4f4f4;
+  background: #e67e22;
+  border: 0;
+  box-shadow: 0px 1px 4px 0px #33333330;
+  border-radius: 0.2rem;
+}
+.wrapper button.active:hover {
+  opacity: 0.9;
+}
+
+.wrapper {
+  display: flex;
+  gap: 0.1rem;
+}

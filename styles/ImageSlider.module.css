@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.overlay,
+.images_wrapper {
+  height: 70vh;
+}
+
+.images_wrapper {
+  width: 100%;
+  margin-bottom: 4rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.image_wrapper {
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  left: -100vw;
+  overflow: hidden;
+  background-color: #00000080;
+}
+
+.image_wrapper.active {
+  left: 0;
+}
+
+.image_wrapper_transition {
+  transition: all .35s cubic-bezier(.25,.46,.45,.94);
+}
+
+.image_wrapper_content,
+.image_wrapper_img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.loaded .image_wrapper_content {
+  z-index: 1;
+  display: block;
+}
+.loaded .image_wrapper_img {
+  display: block;
+}
+
+.active .image_wrapper_content {
+  z-index: 3;
+}
+.active .image_wrapper_img {
+  z-index: 2;
+}
+
+
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  width: 100%;
+  margin-bottom: 4rem;
+  z-index: 4;
+  cursor: pointer;
+}
+
+/* BUTTONS */
+.left_btn svg, .right_btn svg {
+  height: 100%;
+  width: 100%;
+  -webkit-filter: drop-shadow( 4px 4px 4px #00000080);
+  filter: drop-shadow( 4px 4px 4px #00000080);
+}
+.left_btn, .right_btn {
+  position: absolute;
+  z-index: 5;
+  top: 45%;
+  border: 0;
+  margin: 0 2rem;
+  background-color: transparent;
+  /* box-shadow: 0px 1px 4px 0px #33333330; */
+  height: 3rem;
+  width: 3rem;
+  color: #f4f4f4;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.right_btn {
+  right: 0;
+}
+
+/* CONTENT */
+.image_wrapper_content {
+  width: 100%;
+  height: 100%;
+}
+.image_wrapper_content div {
+  color: #f4f4f4;
+  font-size: 5rem;
+  width: inherit;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 2rem;
+  text-shadow: 2px 2px 0px #e67e22;
+  text-shadow: 4px 4px 4px #00000030;
+}
+.image_wrapper_content div h2{
+  font-size: 4rem;
+  font-family: 'Pacifico', cursive;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (max-width: 800px) {
+  .overlay,
+  .images_wrapper {
+    height: 50vh;
+  }
+  .image_wrapper_content div {
+    font-size: 2rem;
+    font-size: 1.5rem;
+    text-shadow: 2px 2px 0px #e67e22;
+    text-shadow: 4px 4px 4px #00000030;
+  }
+  .image_wrapper_content div h2{
+    font-size: 3rem;
+    font-family: 'Pacifico', cursive;
+    margin-bottom: 1rem;
+  }
+  .left_btn, .right_btn {
+    top: 30%;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .overlay,
+  .images_wrapper {
+    height: 30vh;
+  }
+  .left_btn, .right_btn {
+    top: 20%;
+  }
+}

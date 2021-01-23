@@ -1,23 +1,65 @@
-import { useEffect, useContext } from 'react'
-import { API_URL } from '../../../utils/urls'
+import { useEffect, useContext, useState } from 'react'
+import { API_URL, BRAND_NAME } from '../../../utils/urls'
+
+import Header from '../../../components/Header'
+import viewStyles from '../../../styles/View.module.css'
+import Head from 'next/head'
 
 import AuthContext from '../../../context/AuthContext'
 
-export default function Facebook() {
+export default function Facebook({categories}) {
+
+  const [error, setError] = useState(false)
   
   const { login } = useContext(AuthContext)
 
   useEffect(async () => {
-    console.log(location.search)
     const res = await fetch(`${API_URL}/auth/facebook/callback${location.search}`)
     const data = await res.json()
-    console.log(data)
+
+    if(data.error) {
+      setError(true)
+      return
+    }
+
     sessionStorage.setItem('jwt', data.jwt)
     login(data.user.email)
   }, [])
 
 
   return (
-    <div className='spinner'></div>
+    <>
+      <Head>
+        <link rel="icon" href="/brand-logo.png" />
+        <title>Facebook - {BRAND_NAME}</title>
+        <meta name="description" content={`Access ${BRAND_NAME} with your Facebook account.`}/>
+      </Head>
+
+      <Header categories={categories}/>
+        
+      <div className={viewStyles.view}>
+        {error ? 
+          <div>
+            <p>An error has ocurred.</p>
+          </div>
+        :
+          <div className='spinner'></div>
+        }
+      </div>
+    </>
   )
 }
+
+export async function getStaticProps() {
+  // Retrieve all possible paths
+  const categories_res = await fetch(`${API_URL}/categories/`)
+  const categories = await categories_res.json()
+
+  // Return to NextJS context
+  return  {
+    props: {
+      categories: categories
+    }
+  }
+}
+

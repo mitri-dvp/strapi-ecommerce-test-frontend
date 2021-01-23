@@ -1,5 +1,6 @@
 .footer {
-  margin-top: auto;
+  margin-top: 4rem;
+  text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,4 +12,14 @@
 .logo {
   height: 2rem;
   transform: translateY(0.1rem);
+}
+
+.footer span {
+  margin: 0 1rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .footer{ 
+   margin-top: 2rem;
+  }
 }

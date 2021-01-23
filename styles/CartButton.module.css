@@ -1,0 +1,23 @@
+.cart_btn {
+  position: relative;
+  cursor: pointer;
+}
+.cart_btn span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.7rem;
+  background-color: #e67e22;
+  color: #ffffff;
+  box-shadow: 0px 1px 4px 0px #33333330;
+  border-radius: 50%;
+  width: 1.2rem;
+  height: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(25%, -25%);
+}
+.cart_btn img {
+  height: 1.8rem;
+}

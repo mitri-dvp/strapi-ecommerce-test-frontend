@@ -1,9 +1,12 @@
+.wrapper {
+  max-width: 40rem;
+  margin: auto;
+}
 .title {
   text-transform: uppercase;
   letter-spacing: 1px;
   text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 4rem;
+  margin: 4rem 0;
   font-weight: normal;
   position: relative;
 }
@@ -36,6 +39,14 @@
 
 .login_providers {
   width: max-content;
-  padding: 2rem;
+  padding: 0 2rem;
   margin: 0 auto;
+  margin-top: 4rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .login_providers {
+    margin-top: 2rem;
+  }
+  
 }

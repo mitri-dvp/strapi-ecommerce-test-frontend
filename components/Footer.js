@@ -5,7 +5,7 @@ export default function Footer() {
   return (
   <footer className={styles.footer}>
     <p>
-      {BRAND_NAME} © 2020
+      {BRAND_NAME}<span>©</span>{new Date().getFullYear()}
     </p>
   </footer>
   )

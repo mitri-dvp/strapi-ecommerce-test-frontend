@@ -1,25 +1,102 @@
-.nav {
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.header {
   height: 5rem;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr max-content 1fr;
   align-items: center;
+  /* border-bottom: 2px solid #e67e22; */
   box-shadow: 0 2px 2px #e67e22;
   padding: 0 5rem;
+  position: relative;
+  /* margin-bottom: 4rem; */
+  z-index: 9;
+  width: 100%;
+  background-color: #fff;
+}
+
+.nav {
+  display: flex;
+  color: #333333;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav > ol > a {
+  padding: 0.5rem;
+}
+.categories_link {
+  position: relative;
+  width: max-content;
+}
+.categories_link > a {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  cursor: pointer;
+}
+.mobiele_nav_categories_link > a svg,
+.categories_link > a svg{
+  transform: translateY(10%);
+}
+.categories_dropdown {
+  position: absolute;
+  background-color: #fff;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .24);
+  display: grid;
+  left: 0;
+  bottom: 0rem;
+  transform: translateY(95%);
+  width: 150%;
+  opacity: 0;
+  transition: all .2s cubic-bezier(.25,.46,.45,.94);
+  visibility: hidden;
+  z-index: 8;
+}
+.categories_dropdown.show {
+  visibility: visible;
+  transform: translateY(100%);
+  opacity: 1;
+}
+.categories_dropdown > *{ 
+  border-bottom: 1px solid #00000030;
+  padding: 0.75rem 1rem;
+  display: block;
+  width: 100%;
+}
+.categories_dropdown > * a{ 
+  display: block;
+  width: 100%;
+  text-transform: capitalize;
+}
+.categories_dropdown > *:last-child{
+  border-bottom: none;
+}
+.categories_dropdown > * a:hover{
+  opacity: 0.9;
+  text-decoration: underline;
 }
 
 .title {
-  text-align: center;
-  width: auto;
+  margin-left: 1rem;
+  display: flex;
+  justify-content: baseline;
+  width: max-content;
   line-height: 1.5rem;
-  font-weight: normal;
+  text-align: center;
   height: inherit;
   position: relative;
+  font-family: 'Pacifico', cursive;
+}
+.title a {
+  margin-right: auto;
 }
 .title h1 {
   font-weight: normal;
   position: absolute;
   top: 50%;
   left: 50%;
+  width: max-content;
   transform: translate(-50%, -50%);
   text-shadow:
   -1px -1px #ffffff80,
@@ -57,11 +134,20 @@
   padding: 0.1rem;
 }
 
-.auth {
-  height: 100%;
-  margin-left: auto;
+.user_controls {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
+}
+.user_controls > * {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-left: 1.5rem;
+}
+
+.auth {
+
 }
 
 .auth a {
@@ -81,8 +167,124 @@
   padding: 0.25rem;
 }
 
+.mobile_nav {
+  display: none;
+}
+
+.burger {
+  display: flex;
+}
+.burger img{
+  height: 1.8rem;
+  cursor: pointer;
+}
+
+.mobile_nav_overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: #00000000;
+  transition: all 0.2s ease-in-out;
+  visibility: hidden;
+  z-index: 1;
+}
+.mobile_nav_overlay.show {
+  visibility: visible;
+  transform: translateY(0%);
+  background: #00000080;
+  z-index: 8;
+}
+.mobile_nav_body {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 8;
+  background: #fff;
+  padding: 1.5rem;
+  transform: translateX(-100%);
+  transition: all 0.2s ease-in-out;
+  overflow-y: auto;
+}
+.mobile_nav_body.show {
+  transform: translateX(0%);
+}
+
+.mobile_nav_close {
+  display: block;
+  margin-left: auto;
+  height: 2rem;
+  width: 2rem;
+}
+.mobile_nav_close img {
+  cursor: pointer;
+  height: 2rem;
+  width: 2rem;
+}
+
+.mobile_nav_body {
+  display: flex;
+  flex-direction: column;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.mobile_nav_body a:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.mobiele_nav_categories_link svg {
+  margin-left: 1rem;
+}
+.mobile_nav_body > ol{
+  border-bottom: 1px solid #00000030;
+  width: 100%;
+  padding: 1rem 0;
+}
+.mobile_nav_body > ol a{
+  padding: 1rem 0;
+}
+.mobile_nav_body .categories_dropdown_nav {
+  display: none;
+}
+.mobile_nav_body .categories_dropdown_nav.show {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.mobile_nav_body .categories_dropdown_nav ol {
+}
+
+
+@media only screen and (max-width: 940px) {
+  .nav {
+    display: none;
+  }
+  .mobile_nav {
+    display: block;
+  }
+}
 @media only screen and (max-width: 600px) {
   .nav {
     padding: 0 2rem;
+  }
+  .header {
+    padding: 0 2rem;
+  }
+  .title {
+    margin-left: 0;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .mobile_nav_body {
+    width: 30vw;
+    min-width: 450px;
   }
 }

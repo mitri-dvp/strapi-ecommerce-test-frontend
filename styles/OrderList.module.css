@@ -1,59 +1,25 @@
-.table {
+/* .wrapper {
+  width: 50%;
+} */
+.table_wrapper {
   width: 100%;
-  border-collapse: collapse;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
   margin-bottom: 2rem;
 }
 
-.table thead {
-  background-color: #e67e22;
-  color: #fff;
+.pagination span{
+  margin-left: 1rem;
 }
-
-.table thead {
-  width: max-content;
-}
-.table body {
-  width: max-content;
-}
-
-.table thead th{
-  padding: 1em;
-  text-transform: uppercase;
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle;
-}
-
-.table tbody td{
-  padding: 1em;
-  margin: 0.5em;
-}
-
-.table tbody:nth-child(odd) {
-  background-color: #f4f4f4;
-
-}
-
-.paid, .unpaid {
-  width: max-content;
-  border-radius: 0.1em;
-  display: flex;
-  align-items: center;
-  padding: 0.5em 1em!important;
-}
-
-.paid {
-  color: #00b894;
-  background-color: #55efc430;
-  border: 0.1em solid #00b894;
-  width: max-content;
-}
-
-.unpaid {
-  color: #d63031;
-  background-color: #ff767530;
-  border: 0.1em solid #d63031;
-  width: max-content;
+.pagination div:last-of-type{
+  margin-left: auto;
 }
 
 @media only screen and (max-width: 600px) {
