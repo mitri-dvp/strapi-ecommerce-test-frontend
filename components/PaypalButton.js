@@ -9,13 +9,14 @@ export default function PaypalButton() {
   const [loading, setLoading] = useState(false)
 
   const { getToken } = useContext(AuthContext); 
-  const { products, total } = useContext(CartContext); 
+  const { getProducts, total } = useContext(CartContext); 
   
   const handleBuy = async () => {
     if(loading) return
     setLoading(true)
     const token = await getToken()
     
+    const products = getProducts()
     console.log(products, total)
 
     const res = await fetch(`${API_URL}/orders?provider=paypal`, {

@@ -14,6 +14,10 @@ export const CartProvider = (props) => {
 
   const router = useRouter()
 
+  const getProducts = () => {
+    return products
+  }
+
   const redirectToCheckout = () => {
     setIsOpen(false)
     router.push('/checkout')
@@ -97,7 +101,7 @@ export const CartProvider = (props) => {
   }, [products, itemCount, total]);
 
   return (
-    <CartContext.Provider value={{isInsideCart, isOpen, setIsOpen, redirectToCheckout, addToProducts, removeFromProducts, addOne, subtractOne, products, itemCount, total, clearCart}}>
+    <CartContext.Provider value={{isInsideCart, isOpen, setIsOpen, redirectToCheckout, addToProducts, removeFromProducts, addOne, subtractOne, products, getProducts, itemCount, total, clearCart}}>
       {props.children}
     </CartContext.Provider>
   )
