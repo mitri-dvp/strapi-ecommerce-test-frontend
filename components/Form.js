@@ -82,6 +82,10 @@ export default function Form({data}) {
 
       setResponse(data)
 
+      Object.keys(form).forEach((key) => {
+        document.getElementById(key).classList.add(styles.success)
+      })
+
       setLoading(false)
   }
 
@@ -107,7 +111,7 @@ export default function Form({data}) {
         </div>
         <div>
           <label htmlFor="email">Email:</label>
-          {email ? 
+          {data.email ? 
             <input type="text" name="email" id="email" value={email} disabled/>
             :
             <input type="text" name="email" id="email" value={email} onChange={(e) => {setEmail(e.target.value)}}   />
@@ -119,7 +123,7 @@ export default function Form({data}) {
         </div>
         <div>
           <label htmlFor="order">Order Number:</label>
-        {email ? 
+        {data.email ? 
             <input type="text" name="order" id="order" value={order} onChange={(e) => {setOrder(e.target.value)}} />
             :
             <input type="text" name="order" id="order" value={''} disabled/>
