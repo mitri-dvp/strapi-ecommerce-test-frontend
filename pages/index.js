@@ -9,7 +9,7 @@ import {useState, useEffect} from 'react'
 
 export default function Home({products, categories, featured_products, new_products}) {
 
-  const [images_link, setImages] = useState(['/hero-test-5.webp', '/hero-test-4.webp'])
+  const [images_link, setImages] = useState(['https://res.cloudinary.com/dz5vyxfew/image/upload/v1611380093/hero-test-5_k06ade.webp', 'https://res.cloudinary.com/dz5vyxfew/image/upload/v1611380093/hero-test-4_gyzwpb.webp', 'https://res.cloudinary.com/dz5vyxfew/image/upload/v1611380093/hero-test-3_pk5gim.webp'])
   const [windowWidth, setWindowWidth] = useState(0)
   // const [images_link, setImages] = useState(['/hero-test-5.webp', '/hero-test-4.webp', '/hero-test-3.webp'])
 

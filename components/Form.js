@@ -56,7 +56,7 @@ export default function Form({data}) {
 
     if(error) return
     if(sent) return
-    // setSent(true)
+    setSent(true)
     sendEmail(form)
   }
 

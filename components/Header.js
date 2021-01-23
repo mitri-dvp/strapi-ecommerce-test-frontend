@@ -86,7 +86,8 @@ export default function Header({categories}) {
     <div className={styles.title}>
       <Link href='/'>
       <a>
-        <img src="/brand-logo.png" alt=""/>
+        {/* <img src="/brand-logo.png" alt=""/> DEV */}
+        <img src="https://res.cloudinary.com/dz5vyxfew/image/upload/v1611380093/brand-logo_v0bpfk.png" alt=""/>
         <h1>
           Online Shop
         </h1>
