@@ -51,6 +51,7 @@
   grid-template-columns: 1fr;
   margin: 1rem auto;
   max-width: 40rem;
+  position: relative;
 }
 
 @media only screen and (max-width: 600px) {

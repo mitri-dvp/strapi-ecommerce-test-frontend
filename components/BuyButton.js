@@ -9,6 +9,7 @@ import CartContext from '../context/CartContext'
 const stripePromise = loadStripe(STRIPE_PK)
 
 export default function BuyButton() {
+  const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const { getToken } = useContext(AuthContext);
@@ -16,6 +17,7 @@ export default function BuyButton() {
 
   const handleBuy = async () => {
     if(loading) return
+    setError(false)
     setLoading(true)
 
     const products = getProducts()
@@ -34,7 +36,11 @@ export default function BuyButton() {
     })
     const data = await res.json()
 
-    if(data.error) return
+    if(data.error) {
+      setError(true)
+      setLoading(false)
+      return
+    }
 
     const result = await stripe.redirectToCheckout({
       sessionId: data.id
@@ -43,9 +49,15 @@ export default function BuyButton() {
 
   return (
     <>
-      <button className={styles.buy} onClick={handleBuy}>
+      <button className={`${styles.buy} ${loading && styles.loading_wrapper}`} onClick={handleBuy}>
         Buy
+        {loading && <div className={`spinner ${styles.loading}`}></div>}
       </button>
+      {error && (
+        <div className={styles.error}>
+          An error ocurred, please try again.
+        </div>
+      )}
     </>
   )
 }
