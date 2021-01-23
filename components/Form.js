@@ -73,20 +73,20 @@ export default function Form({data}) {
       })
 
       const data = await res.json()
-      // console.log(data)
+
       if(data.error) {
         console.log('Error ', data.error)
         setResponse(null)
         return
       }
-      console.log('Success ', data)
+
       setResponse(data)
 
       setLoading(false)
   }
 
   useEffect(() => {
-    if(data.email) setEmail(data.email)
+
     const formData = new FormData(formDOM.current)
     setName(formData.get('name'))
     setEmail(formData.get('email'))
@@ -94,8 +94,8 @@ export default function Form({data}) {
     setOrder(formData.get('order'))
     setMessage(formData.get('message'))
 
-
-  }, [])
+    if(data.email) setEmail(data.email)
+  }, [data])
 
   return (
     <form ref={formDOM} className={styles.form} onSubmit={onSubmit}>
@@ -107,7 +107,7 @@ export default function Form({data}) {
         </div>
         <div>
           <label htmlFor="email">Email:</label>
-          {data.email ? 
+          {email ? 
             <input type="text" name="email" id="email" value={email} disabled/>
             :
             <input type="text" name="email" id="email" value={email} onChange={(e) => {setEmail(e.target.value)}}   />
@@ -119,7 +119,7 @@ export default function Form({data}) {
         </div>
         <div>
           <label htmlFor="order">Order Number:</label>
-        {data.email ? 
+        {email ? 
             <input type="text" name="order" id="order" value={order} onChange={(e) => {setOrder(e.target.value)}} />
             :
             <input type="text" name="order" id="order" value={''} disabled/>
