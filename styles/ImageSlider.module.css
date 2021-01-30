@@ -62,6 +62,7 @@
   margin-bottom: 4rem;
   z-index: 4;
   cursor: pointer;
+  touch-action: none;
 }
 
 /* BUTTONS */

@@ -14,7 +14,7 @@ export default function Google({categories}) {
   const { login } = useContext(AuthContext)
 
   useEffect(async () => {
-    const res = await fetch(`${API_URL}/auth/google/callback?${location.search}`)
+    const res = await fetch(`${API_URL}/auth/google/callback${location.search}`)
     const data = await res.json()
     
     if(data.error) {

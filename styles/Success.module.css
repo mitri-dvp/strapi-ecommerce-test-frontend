@@ -32,3 +32,10 @@
   opacity: 0.8;
   text-decoration: underline;
 }
+
+.oos {
+  text-align: left;
+  margin: 1.5rem 0;
+  display: grid;
+  gap: 0.5rem;
+}

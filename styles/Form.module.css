@@ -8,7 +8,7 @@
   display: grid;
 }
 
-.form input[type=submit],
+.form .submit,
 .form textarea,
 .form_inputs input {
   font-size: 1rem;
@@ -21,7 +21,7 @@
   margin-bottom: 1rem;
   cursor: pointer;
 }
-.form input[type=submit] {
+.form .submit {
   background-color: #e67e22;
   color: #f4f4f4;
   box-shadow: 0px 1px 4px 0px #33333330;
@@ -34,7 +34,7 @@
   opacity: 0.8;
   transition: all .15s cubic-bezier(.25,.46,.45,.94);
 }
-.form input[type=submit]:hover {
+.form .submit:hover {
   opacity: 1;
 }
 
@@ -55,4 +55,16 @@
 .form textarea.success,
 .form_inputs input.success {
   border-color: #00ff00ee;
+}
+
+.submit.loading  {
+  height: unset;
+  width: 100%;
+  background-color: #00000030;
+  color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.submit.success {
+  background-color: #32cd32ee;;
 }

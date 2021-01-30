@@ -9,34 +9,33 @@ import Head from 'next/head'
 import CartContext from '../../context/CartContext'
 
 const useOrder = (query) => {
-  const [order, setOrder] = useState(null)
+  const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
   const { paymentId, token, PayerID } = query
 
   const { clearCart } = useContext(CartContext); 
   
   useEffect(() => {
-    const transactions = JSON.parse(sessionStorage.getItem('PayPalTransactions'))
+    const products_list = JSON.parse(sessionStorage.getItem('PayPalItems'))
+    const transactions =  JSON.parse(sessionStorage.getItem('PayPalTransactions'))
     const fetchOrder = async () => {
-
       if(paymentId) {
         setLoading(true)
-
         try {
           const res = await fetch(`${API_URL}/orders/confirm?provider=paypal`, {
             method: 'POST',
-            body: JSON.stringify({ paymentId, token, PayerID, transactions }),
+            body: JSON.stringify({ paymentId, token, PayerID, transactions, products_list }),
             headers: {
               'Content-type': `application/json`,
             }
           })
 
           const data = await res.json()
-          setOrder(data)
-          sessionStorage.removeItem('PayPalTransactions')
+          setData(data)
+          // sessionStorage.removeItem('PayPalItems')
           clearCart()
         } catch (error) {
-          setOrder(null)
+          setData(null)
         }
 
         setLoading(false)
@@ -45,13 +44,17 @@ const useOrder = (query) => {
     fetchOrder()
   }, [paymentId])
 
-  return {order, loading}
+  return {data, loading}
 }
 
 export default function success({categories}) {
 
   const router = useRouter()
-  const { order, loading } = useOrder(router.query)
+  const { data, loading } = useOrder(router.query)
+
+  const redirectToProfilePage = () => {
+    router.push('/profile')
+  }
 
   return (
     <div>
@@ -65,19 +68,40 @@ export default function success({categories}) {
       
       <div className={viewStyles.view}>
         <div>
-          
-        {loading && <div className='spinner'></div>}
-          {order &&
+          {loading && <div className='spinner'></div>}
+          {data?.statusCode === 304 &&
+          <>
+            <h2 className={styles.title}>Not Modified.</h2>
+            <div className={styles.confirm_wrapper}>
+              <div>{data.message}</div>
+            </div>
+          </>
+          }
+          {data?.statusCode >= 400 &&
+          <>
+            <h2 className={styles.title}>Error.</h2>
+            <div className={styles.confirm_wrapper}>
+              <div>{data.message}</div>
+              {data.products &&
+              <ul className={styles.oos}>
+                {data.products.map(product => <li>{product.title}</li>)}
+              </ul>
+              }
+              <div>Payment was cancelled.</div>
+            </div>
+          </>
+          }
+          {data?.statusCode === 200 &&
           <>
             <h2 className={styles.title}>Success!</h2>
             <div className={styles.confirm_wrapper}>
-              <div>Your order is confirmed with order number: <span className={styles.confirm_order}>{order.id}</span></div>
+              <div>Your order is confirmed with order number: <span className={styles.confirm_order}>{data.updated_order.id}</span></div>
               <div>Please check your Mail Inbox or your <span className={styles.link} onClick={redirectToProfilePage}>Profile Page</span>
                 </div>
             </div>
           </>
           }
-          </div>
+        </div>
       </div>
     </div>
   )

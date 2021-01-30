@@ -10,6 +10,7 @@
   cursor: pointer;
   text-transform: uppercase;
   opacity: 1;
+  position: relative;
 }
 .paypal svg{
   margin: 0rem 0.2rem;
@@ -17,4 +18,32 @@
 
 .paypal:hover {
   background-image: linear-gradient(#00000011, #00000011), linear-gradient(#ffc439, #ffc439);
+}
+
+.loading_wrapper {
+  border: 1px solid #33333380;
+  color: transparent;
+  background-color: transparent;
+}
+.loading_wrapper:hover {
+  background-image: none;
+}
+
+.loading {
+  background-size: contain;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  background-color: #efefefaa;
+  background-repeat: no-repeat;
+}
+
+.error {
+  color: #ff0000ee;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-150%);
 }

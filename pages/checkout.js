@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import { API_URL, BRAND_NAME } from '../utils/urls'
 
@@ -6,7 +6,7 @@ import Header from '../components/Header'
 import viewStyles from '../styles/View.module.css'
 import styles from '../styles/Checkout.module.css'
 import Head from 'next/head'
-import BuyButton from '../components/BuyButton'
+import StripeButton from '../components/StripeButton'
 import PaypalButton from '../components/PaypalButton'
 import CartCheckout from '../components/CartCheckout'
 
@@ -16,6 +16,8 @@ import AuthContext from '../context/AuthContext'
 
 export default function Checkout({categories}) {
   const { user } = useContext(AuthContext);
+
+  const [disabled, setDisabled] = useState(false)
 
   const router = useRouter()
 
@@ -50,10 +52,17 @@ export default function Checkout({categories}) {
               </button>
             }
             {user &&
-              <div className={styles.payment_options}>
-                <BuyButton />
-                <PaypalButton />
+              (disabled ?
+              <div className={styles.payment_options} onClick={() => {setDisabled(true)}}>
+                <StripeButton disabled={disabled} setDisabled={setDisabled}/>
+                <PaypalButton disabled={disabled} setDisabled={setDisabled}/>
               </div>
+              :
+              <div className={styles.payment_options} onClick={() => {setDisabled(true)}}>
+                <StripeButton disabled={disabled} setDisabled={setDisabled}/>
+                <PaypalButton disabled={disabled} setDisabled={setDisabled}/>
+              </div>
+              )
             }
           </div>
         </div>

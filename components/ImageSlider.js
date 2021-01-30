@@ -48,7 +48,7 @@ export default function ImageSlider({images_link}) {
       setInitialPosition(touch.clientX)
     }
 
-    console.log('Capture Click', index)
+    // console.log('Capture Click', index)
 
     currentImg.classList.remove(styles.image_wrapper_transition)
     nextImg.classList.remove(styles.image_wrapper_transition)
@@ -76,7 +76,7 @@ export default function ImageSlider({images_link}) {
     if(!clicked) return
     setClicked(false)
 
-    console.log('Capture Stop', index)
+    // console.log('Capture Stop', index)
 
     currentImg.classList.add(styles.image_wrapper_transition)
     nextImg.classList.add(styles.image_wrapper_transition)
@@ -84,7 +84,6 @@ export default function ImageSlider({images_link}) {
 
     let x;
     if(!e.clientX) {
-      console.log(e)
       x = e.changedTouches[0].clientX;
     } else {
       x = e.clientX
@@ -132,7 +131,7 @@ export default function ImageSlider({images_link}) {
 
   const updateImagesRoles = (side) => {
     if(side === 'left') {
-      console.log('Update To the Left')
+      // console.log('Update To the Left')
       if(index === images.length - 1) {
 
         setCurrentImg(images[0])
@@ -156,7 +155,7 @@ export default function ImageSlider({images_link}) {
     }
 
     if(side === 'right') {
-      console.log('Update To the Right')
+      // console.log('Update To the Right')
       if(index === 0){
 
         setCurrentImg(images[images.length - 1])
@@ -229,10 +228,7 @@ export default function ImageSlider({images_link}) {
         onMouseUp={captureStop}
         onMouseLeave={captureStop}
 
-        onTouchMove={(e) => {
-          e.preventDefault()
-          onTouchMove(e)
-        }}
+        onTouchMove={onTouchMove}
         onTouchStart={captureClick}
         onTouchEnd={captureStop}
       >

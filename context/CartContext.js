@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { API_URL } from '../utils/urls'
 
 const CartContext = createContext()
 
@@ -11,6 +12,8 @@ export const CartProvider = (props) => {
   const [itemCount, setItemCount] = useState(0)
   const [total, setTotal] = useState(0)
   const [isOpen, setIsOpen] = useState(false)
+
+  const [loading, setLoading] = useState(false)
 
   const router = useRouter()
 
@@ -28,29 +31,33 @@ export const CartProvider = (props) => {
     return products.find(e => e.id === product.id);
   }
 
-  const addToProducts = (product) => {
+  const addToProducts = async (product) => {
     if(isInsideCart(product)) {
       setIsOpen(true)
       return
     }
-    product.cart_amount = 1
-    setProducts([...products, product])
-    setIsOpen(true)
-    return
+    product.cart_amount = 0
+    if(loading) return
+    if(await isInStock(product)) {
+      product.cart_amount = 1
+      setProducts([...products, product])
+      setIsOpen(true)
+      return
+    }
   };
 
   const removeFromProducts = (product) => {
     setProducts(products.filter(e => e.id != product.id))
-    updateCartValues() // Fix????
     return
   };
 
-  const addOne = (product) => {
-    product.limit = 10
-    if(product.cart_amount >= product.limit) return
-    product.cart_amount = product.cart_amount + 1
-    updateCartValues()
-    return
+  const addOne = async (product) => {
+    if(loading) return
+    if(await isInStock(product)) {
+      product.cart_amount = product.cart_amount + 1
+      updateCartValues()
+      return
+    }
   }
 
   const subtractOne = (product) => {
@@ -63,7 +70,6 @@ export const CartProvider = (props) => {
   const clearCart = () => {
     localStorage.removeItem('cart')
     setProducts([])
-    updateCartValues()
   }
 
   const updateCartValues = () => {
@@ -81,6 +87,25 @@ export const CartProvider = (props) => {
     updateCartValues()
     localStorage.setItem('cart', JSON.stringify({products, itemCount, total}));
   };
+
+  const isInStock = async (product) => {
+    setLoading(true)
+    const res = await fetch(`${API_URL}/products/${product.id}`)
+    const realProduct = await res.json()
+
+    console.log(realProduct.amount)
+
+    if((product.cart_amount + 1) > realProduct.amount) {
+      setLoading(false)
+
+      console.log(false)
+      return false
+    }
+    setLoading(false)
+    
+    console.log(true)
+    return true
+  }
 
   useEffect(async () => {
     if(firstLoad) {

@@ -9,19 +9,19 @@ import Head from 'next/head'
 import CartContext from '../../context/CartContext'
 
 const useOrder = (session_id) => {
-  const [order, setOrder] = useState(null)
+  const [data, setData] = useState(null)
   const [loading, setLoading] = useState(false)
   const { clearCart } = useContext(CartContext); 
 
   useEffect(() => {
+    const products_list = JSON.parse(sessionStorage.getItem('StripeItems'))
     const fetchOrder = async () => {
       if(session_id) {
         setLoading(true)
-
         try {
           const res = await fetch(`${API_URL}/orders/confirm?provider=stripe`, {
             method: 'POST',
-            body: JSON.stringify({ checkout_session: session_id }),
+            body: JSON.stringify({ checkout_session: session_id, products_list }),
             headers: {
               'Content-type': `application/json`,
             }
@@ -29,10 +29,13 @@ const useOrder = (session_id) => {
 
           const data = await res.json()
           console.log(data)
-          setOrder(data)
-          clearCart()
+          setData(data)
+          if(data?.statusCode === 200) {
+            sessionStorage.removeItem('StripeItems')
+            clearCart()
+          }
         } catch (error) {
-          setOrder(null)
+          setData(null)
         }
         setLoading(false)
       }
@@ -40,7 +43,7 @@ const useOrder = (session_id) => {
     fetchOrder()
   }, [session_id])
 
-  return {order, loading}
+  return {data, loading}
 }
 
 export default function success({categories}) {
@@ -52,7 +55,7 @@ export default function success({categories}) {
     router.push('/profile')
   }
 
-  const { order, loading } = useOrder(session_id)
+  const { data, loading } = useOrder(session_id)
 
   return (
     <div>
@@ -68,11 +71,33 @@ export default function success({categories}) {
       <div>
           
             {loading && <div className='spinner'></div>}
-            {order &&
+            {data?.statusCode === 304 &&
+            <>
+              <h2 className={styles.title}>Not Modified.</h2>
+              <div className={styles.confirm_wrapper}>
+                <div>{data.message}</div>
+              </div>
+            </>
+            }
+            {data?.statusCode >= 400 &&
+            <>
+              <h2 className={styles.title}>Error.</h2>
+              <div className={styles.confirm_wrapper}>
+                <div>{data.message}</div>
+                {data.products &&
+                <ul className={styles.oos}>
+                  {data.products.map(product => <li>{product.title}</li>)}
+                </ul>
+                }
+                <div>Payment was cancelled.</div>
+              </div>
+            </>
+            }
+            {data?.statusCode === 200 &&
             <>
               <h2 className={styles.title}>Success!</h2>
               <div className={styles.confirm_wrapper}>
-                <div>Your order is confirmed with order number: <span className={styles.confirm_order}>{order.id}</span></div>
+                <div>Your order is confirmed with order number: <span className={styles.confirm_order}>{data.updated_order.id}</span></div>
                 <div>Please check your Mail Inbox or your <span className={styles.link} onClick={redirectToProfilePage}>Profile Page</span>
                   </div>
               </div>

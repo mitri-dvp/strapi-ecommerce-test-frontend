@@ -16,6 +16,7 @@ export default function Form({data}) {
 
   // Email
   const [response, setResponse] = useState(null)
+  const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
 
 
@@ -63,7 +64,6 @@ export default function Form({data}) {
   const sendEmail = async (form) => {
     setLoading(true)
 
-      console.log('Hitting server with: ', form)
       const res = await fetch(`${API_URL}/orders/contact`, {
         method: 'POST',
         body: JSON.stringify(form),
@@ -74,23 +74,20 @@ export default function Form({data}) {
 
       const data = await res.json()
 
+      setResponse(data)
+
       if(data.error) {
-        console.log('Error ', data.error)
-        setResponse(null)
+        setError(true)
         return
       }
 
-      setResponse(data)
-
-      Object.keys(form).forEach((key) => {
-        document.getElementById(key).classList.add(styles.success)
-      })
-
+      setError(false)
       setLoading(false)
   }
 
   useEffect(() => {
-
+    console.log(response)
+    console.log(error)
     const formData = new FormData(formDOM.current)
     setName(formData.get('name'))
     setEmail(formData.get('email'))
@@ -137,7 +134,10 @@ export default function Form({data}) {
           onChange={(e) => {setMessage(e.target.value)}}
         ></textarea>
       </div>
-      <input type="submit" value="Send"/>
+      <input
+        className={`${styles.submit} ${loading && `spinner ${styles.loading}`}
+        ${(response && !error) && `${styles.success}`}`}
+        type="submit" value={(response && !error) ? 'Email sent!' :  'Send'} disabled={loading}/>
     </form>
   )
 }
