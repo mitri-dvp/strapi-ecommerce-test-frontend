@@ -24,10 +24,18 @@
 }
 .nav > ol > a {
   padding: 0.5rem;
+  transition: all .15s cubic-bezier(.25,.46,.45,.94);
+}
+.nav > ol > a:hover {
+  color: #e67e22;
 }
 .categories_link {
   position: relative;
   width: max-content;
+  transition: all .15s cubic-bezier(.25,.46,.45,.94);
+}
+.categories_link.hover > a{
+  color: #e67e22;
 }
 .categories_link > a {
   display: flex;
@@ -35,6 +43,7 @@
   align-items: center;
   cursor: pointer;
 }
+
 .mobiele_nav_categories_link > a svg,
 .categories_link > a svg{
   transform: translateY(10%);
@@ -68,13 +77,14 @@
   display: block;
   width: 100%;
   text-transform: capitalize;
+  transition: all .15s cubic-bezier(.25,.46,.45,.94);
 }
 .categories_dropdown > *:last-child{
   border-bottom: none;
 }
 .categories_dropdown > * a:hover{
   opacity: 0.9;
-  text-decoration: underline;
+  color: #e67e22;  
 }
 
 .title {

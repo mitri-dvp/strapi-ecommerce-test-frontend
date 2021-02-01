@@ -32,11 +32,3 @@ opacity: 0.8;
   background-color: #00000010;
   background-repeat: no-repeat;
 }
-
-.error {
-  color: #ff0000ee;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translateY(-150%);
-}

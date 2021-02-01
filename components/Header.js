@@ -101,7 +101,11 @@ export default function Header({categories}) {
           <a>Home</a>
         </Link>
       </ol>
-      <ol className={styles.categories_link} onMouseEnter={() => setShowCategories(true)} onMouseLeave={() => setShowCategories(false)}>
+      <ol 
+        className={`${styles.categories_link} ${showCategories && styles.hover}`}
+        onMouseEnter={() => setShowCategories(true)}
+        onMouseLeave={() => setShowCategories(false)}
+      >
           <a>
             Categories
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-caret-down-fill" viewBox="0 0 16 16">

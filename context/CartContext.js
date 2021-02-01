@@ -93,17 +93,17 @@ export const CartProvider = (props) => {
     const res = await fetch(`${API_URL}/products/${product.id}`)
     const realProduct = await res.json()
 
-    console.log(realProduct.amount)
+    if(realProduct.amount <= 0) {
+      setLoading(false)
+      return false
+    }
 
     if((product.cart_amount + 1) > realProduct.amount) {
       setLoading(false)
-
-      console.log(false)
       return false
     }
     setLoading(false)
     
-    console.log(true)
     return true
   }
 
@@ -126,7 +126,7 @@ export const CartProvider = (props) => {
   }, [products, itemCount, total]);
 
   return (
-    <CartContext.Provider value={{isInsideCart, isOpen, setIsOpen, redirectToCheckout, addToProducts, removeFromProducts, addOne, subtractOne, products, getProducts, itemCount, total, clearCart}}>
+    <CartContext.Provider value={{isInsideCart, isOpen, setIsOpen, loading, setLoading, isInStock, redirectToCheckout, addToProducts, removeFromProducts, addOne, subtractOne, products, getProducts, itemCount, total, clearCart}}>
       {props.children}
     </CartContext.Provider>
   )

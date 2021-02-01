@@ -17,7 +17,9 @@ import AuthContext from '../context/AuthContext'
 export default function Checkout({categories}) {
   const { user } = useContext(AuthContext);
 
+  const [error, setError] = useState('')
   const [disabled, setDisabled] = useState(false)
+  const [oos, setOos] = useState({})
 
   const router = useRouter()
 
@@ -44,7 +46,7 @@ export default function Checkout({categories}) {
 
           <div>
             <div className={styles.cart_checkout_wrapper}>
-              <CartCheckout/>
+              <CartCheckout oos={oos}/>
             </div>
             {!user &&
               <button className={`${styles.button} ${styles.payment_options}`}onClick={redirectToLogin}>
@@ -52,17 +54,25 @@ export default function Checkout({categories}) {
               </button>
             }
             {user &&
-              (disabled ?
               <div className={styles.payment_options} onClick={() => {setDisabled(true)}}>
-                <StripeButton disabled={disabled} setDisabled={setDisabled}/>
-                <PaypalButton disabled={disabled} setDisabled={setDisabled}/>
+                {error && <div className={styles.error}>{error}</div> }
+                <StripeButton 
+                  disabled={disabled}
+                  setDisabled={setDisabled}
+                  oos={oos}
+                  setOos={setOos}
+                  error={error}
+                  setError={setError}
+                  />
+                <PaypalButton 
+                  disabled={disabled}
+                  setDisabled={setDisabled}
+                  oos={oos}
+                  setOos={setOos}
+                  error={error}
+                  setError={setError}
+                />
               </div>
-              :
-              <div className={styles.payment_options} onClick={() => {setDisabled(true)}}>
-                <StripeButton disabled={disabled} setDisabled={setDisabled}/>
-                <PaypalButton disabled={disabled} setDisabled={setDisabled}/>
-              </div>
-              )
             }
           </div>
         </div>

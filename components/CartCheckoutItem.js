@@ -1,17 +1,17 @@
 import styles from '../styles/CartCheckout.module.css'
 import { fromImgToUrl, API_URL, BRAND_NAME } from '../utils/urls'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 import CartContext from '../context/CartContext'
 
-export default function CartCheckoutItem({product}) {
+export default function CartCheckoutItem({product, oos}) {
 
-  const { inStock, isInStock } = useState(false)
+  const { removeFromProducts, addOne, subtractOne } = useContext(CartContext);
 
   // Check for stock
 
   return (
-    <tr key={product.title}>  
+    <tr key={product.title} className={oos && styles.oos}>  
       <td className={styles.cart_checkout__img}>
         <img src={fromImgToUrl(product.image)} alt=""/>
         {/* {!inStock ? (
@@ -35,7 +35,11 @@ export default function CartCheckoutItem({product}) {
       <td>
         <h4>&nbsp;</h4>
         <h4 className={styles.cart_checkout__title}>{product.title}</h4>
+        {oos ? 
+        <h4 className={styles.cart_checkout__oos}>Only {oos} left</h4>
+        :  
         <h4>&nbsp;</h4>
+        }
       </td>
 
       <td>
@@ -44,10 +48,10 @@ export default function CartCheckoutItem({product}) {
         <h4>&nbsp;</h4>
       </td>
 
-      <td> 
-        <h4>&nbsp;</h4>
+      <td className={styles.cart_checkout__controls}> 
+        <img className={styles.item_up} onClick={() => {addOne(product)}} src="/arrow.svg"/>
         <p className={styles.item_amount}>{product.cart_amount}</p>
-        <h4>&nbsp;</h4>
+        <img className={styles.item_down} onClick={() => {subtractOne(product)}} src="/arrow.svg"/>
       </td>
 
       <td>

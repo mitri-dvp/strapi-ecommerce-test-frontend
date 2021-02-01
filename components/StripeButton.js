@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js'
 import { STRIPE_PK, API_URL } from '../utils/urls'
 
@@ -8,8 +8,7 @@ import CartContext from '../context/CartContext'
 
 const stripePromise = loadStripe(STRIPE_PK)
 
-export default function StripeButton({disabled, setDisabled}) {
-  const [error, setError] = useState(false)
+export default function StripeButton({disabled, setDisabled, oos, setOos, error, setError}) {
   const [loading, setLoading] = useState(false)
 
   const { getToken } = useContext(AuthContext);
@@ -18,7 +17,6 @@ export default function StripeButton({disabled, setDisabled}) {
   const handleBuy = async () => {
     if(loading) return
     if(disabled) return
-    setError(false)
     setDisabled(true)
     setLoading(true)
 
@@ -37,8 +35,19 @@ export default function StripeButton({disabled, setDisabled}) {
     })
     const data = await res.json()
 
+    if(data.products) {
+      let temp = {}
+      data.products.forEach(product => {
+        temp[product.id]=product.amount
+      })
+      setOos(temp)
+      setError('Some items are Not Available, please check cart.')
+      setDisabled(false)
+      setLoading(false)
+      return
+    }
     if(data.error) {
-      setError(true)
+      setError('An error ocurred, please try again.')
       setDisabled(false)
       setLoading(false)
       return
@@ -51,17 +60,13 @@ export default function StripeButton({disabled, setDisabled}) {
     const result = await stripe.redirectToCheckout({sessionId: id})
   }
 
+
   return (
     <>
       <button className={`${styles.buy} ${loading && styles.loading_wrapper}`} onClick={handleBuy}>
         Buy
         {loading && <div className={`spinner ${styles.loading}`}></div>}
       </button>
-      {error && (
-        <div className={styles.error}>
-          An error ocurred, please try again.
-        </div>
-      )}
     </>
   )
 }

@@ -53,10 +53,21 @@
   text-transform: uppercase;
   opacity: 0.8;
   margin-top: 2.5rem;
-  transition: all .15s cubic-bezier(.25,.46,.45,.94);
 }
 .button:hover {
   opacity: 1;
+}
+.button.loading {
+  background-color: #ffffff;
+  background-image: url('/spinner.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.5;
+}
+.button.oos {
+  opacity: 1;
+  cursor: no-drop;
 }
 
 .payment_options {

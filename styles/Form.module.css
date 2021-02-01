@@ -68,3 +68,10 @@
 .submit.success {
   background-color: #32cd32ee;;
 }
+
+@media only screen and (max-width: 600px) {
+  .form_inputs {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

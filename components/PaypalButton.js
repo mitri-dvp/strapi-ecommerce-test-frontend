@@ -5,9 +5,9 @@ import styles from '../styles/PaypalButton.module.css';
 import AuthContext from '../context/AuthContext'
 import CartContext from '../context/CartContext'
 
-export default function PaypalButton({disabled, setDisabled}) {
-  const [error, setError] = useState(false)
+export default function PaypalButton({disabled, setDisabled, oos, setOos, error, setError}) {
   const [loading, setLoading] = useState(false)
+  const [response, setResponse] = useState(null)
 
   const { getToken } = useContext(AuthContext); 
   const { getProducts, total } = useContext(CartContext); 
@@ -15,7 +15,6 @@ export default function PaypalButton({disabled, setDisabled}) {
   const handleBuy = async () => {
     if(loading) return
     if(disabled) return
-    setError(false)
     setLoading(true)
     setDisabled(true)
 
@@ -33,12 +32,24 @@ export default function PaypalButton({disabled, setDisabled}) {
     })
     const data = await res.json();
 
-    if(data.error) {
-      setError(true)
-      setLoading(false)
+    if(data.products) {
+      let temp = {}
+      data.products.forEach(product => {
+        temp[product.id]=product.amount
+      })
+      setOos(temp)
+      setError('Some items are Not Available, please check cart.')
       setDisabled(false)
+      setLoading(false)
       return
     }
+    if(data.error) {
+      setError('An error ocurred, please try again.')
+      setDisabled(false)
+      setLoading(false)
+      return
+    }
+
 
     const {link, transactions, products_list} = data
 
@@ -50,11 +61,6 @@ export default function PaypalButton({disabled, setDisabled}) {
 
   return (
     <>
-      {error && (
-        <div className={styles.error}>
-          An error ocurred, please try again.
-        </div>
-      )}
       <button className={`${styles.paypal} ${loading && styles.loading_wrapper}`} onClick={handleBuy}>
       {loading && <div className={`spinner ${styles.loading}`}></div>}
       <svg width="18" height="24" viewBox="0 0 24 32" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin meet">

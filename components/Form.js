@@ -86,8 +86,6 @@ export default function Form({data}) {
   }
 
   useEffect(() => {
-    console.log(response)
-    console.log(error)
     const formData = new FormData(formDOM.current)
     setName(formData.get('name'))
     setEmail(formData.get('email'))

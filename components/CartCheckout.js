@@ -4,7 +4,7 @@ import styles from '../styles/CartCheckout.module.css'
 import CartContext from '../context/CartContext'
 import CartCheckoutItem from './CartCheckoutItem'
 
-export default function CartCheckout() {
+export default function CartCheckout({oos}) {
   const { products, total } = useContext(CartContext)
   return (
     <>
@@ -19,7 +19,8 @@ export default function CartCheckout() {
         </tr>
       </thead>
       <tbody>
-        {products.map(product => (<CartCheckoutItem product={product} key={product.id}/> ))}
+        {products.map(product => (<CartCheckoutItem product={product} oos={oos[product.id]} key={product.id}/>)
+        )}
         <tr>
           <td>&nbsp;</td>
           <td>&nbsp;</td>

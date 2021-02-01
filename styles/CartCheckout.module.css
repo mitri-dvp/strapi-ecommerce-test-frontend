@@ -15,6 +15,19 @@
   text-transform: uppercase;
 }
 
+.cart_checkout__oos {
+  font-style: italic;
+  color: #d63031ee;
+}
+
+.cart_checkout__controls img {
+  display: block;
+  margin: auto;
+  transform: rotate(90deg);
+  cursor: pointer;
+}
+.cart_checkout__controls img.item_up{transform: rotate(-90deg);}
+
 .cart_checkout thead th {
   text-transform: uppercase;
 }
@@ -66,6 +79,12 @@
   border: 1px solid #00b894;
   color: #00b894;
   background-color: #85ffe7;
+}
+
+.oos {
+  border: 2px solid #d63031ee;
+  background-color: #d6303110;
+
 }
 
 @media only screen and (max-width: 800px) {

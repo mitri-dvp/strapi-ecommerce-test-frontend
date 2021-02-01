@@ -28,7 +28,6 @@ const useOrder = (session_id) => {
           })
 
           const data = await res.json()
-          console.log(data)
           setData(data)
           if(data?.statusCode === 200) {
             sessionStorage.removeItem('StripeItems')

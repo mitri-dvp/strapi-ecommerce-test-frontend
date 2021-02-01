@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { formatPrice } from '../../utils/format'
 import { fromImgToUrl, API_URL, BRAND_NAME } from '../../utils/urls'
@@ -10,9 +10,8 @@ import Header from '../../components/Header'
 
 import CartContext from '../../context/CartContext'
 
-const Product = ({ product, categories }) => {
-  const { addToProducts, isInsideCart } = useContext(CartContext);
-
+const Product = ({ product, categories }) => {  
+  // Image Zoom In Effect Start - Should make a component
   function zoomIn(e) {
     const imgWrapper = document.getElementById('product-img-wrapper')
     const img = imgWrapper.children[0]
@@ -47,6 +46,20 @@ const Product = ({ product, categories }) => {
   }
   
   const onMouseMove = throttled(10, zoomIn);
+  // // Image Zoom In Effect End
+
+  const { addToProducts, isInsideCart, loading, setLoading, isInStock } = useContext(CartContext);
+
+  const [stock, setStock] = useState(true)
+
+  useEffect(async () => {
+      checkIsInStock()
+  }, [])
+
+  async function checkIsInStock() {
+    const res = await isInStock(product)
+    setStock(res)
+  }
 
   return (
     <>
@@ -75,9 +88,16 @@ const Product = ({ product, categories }) => {
             {product.description}
           </p>
 
-          <button className={styles.button} onClick={() => {addToProducts(product)}}>
+          {stock ? 
+          <button className={`${styles.button} ${(loading && !isInsideCart(product)) && styles.loading}`} onClick={() => {addToProducts(product)}}>
             {isInsideCart(product) ? 'Open Cart' : 'Add To Cart'}
           </button>
+            : 
+          <button className={`${styles.button} ${styles.oos}`}>
+            Out Of Stock
+          </button>
+          
+          }
 
         </div>
 

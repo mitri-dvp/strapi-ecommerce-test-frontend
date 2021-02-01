@@ -16,12 +16,12 @@ export default function OrderItem({order}) {
             <h4>{new Date(order.created_at).toLocaleDateString('en-US')}</h4>
           </div>
           <div>
-            <h4>Total</h4>
-            <h4>${order.total}</h4>
-          </div>
-          <div>
             <h4>ID</h4>
             <h4>{order.id}</h4>
+          </div>
+          <div>
+            <h4>Total</h4>
+            <h4>${order.total}</h4>
           </div>
           <div className={styles.status}>
             <h4>Status</h4>

@@ -49,6 +49,21 @@
   margin-top: 2rem;
 }
 
+.loading {
+  top:0;
+  left: 0;
+  position: absolute;
+  background-color: #ffffff;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  background-image: url('/spinner.gif');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.2;
+}
+
 .cart_total {
   display: flex; 
   justify-content: space-between;

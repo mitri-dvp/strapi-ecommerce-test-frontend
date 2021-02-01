@@ -1,14 +1,17 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import styles from '../styles/Cart.module.css'
 import CartItem from '../components/CartItem'
 import CartContext from '../context/CartContext'
 
 export default function Cart() {
-  const { products, total, redirectToCheckout, isOpen, setIsOpen } = useContext(CartContext)
+  const { products, total, redirectToCheckout, isOpen, setIsOpen, loading, setLoading } = useContext(CartContext)
+
   return (
     <div className={`${styles.cart_overlay} ${isOpen && styles.show}`}>
       <div className={`${styles.cart} ${isOpen && styles.show}`}>
+      <div className={loading ? styles.loading : ''}>
+      </div>
           <span className={styles.close_cart}>
               <img src="/x.svg" onClick={() => {setIsOpen(false)}}/>
           </span>

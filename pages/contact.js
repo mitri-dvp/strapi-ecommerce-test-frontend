@@ -12,7 +12,7 @@ export default function Home({categories}) {
   const { user } = useContext(AuthContext)
 
   useEffect(() => {
-      console.log(user)
+      // console.log(user)
   }, [user])
 
   return (

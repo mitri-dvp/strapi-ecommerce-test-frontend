@@ -54,6 +54,14 @@
   position: relative;
 }
 
+.error {
+  color: #ff0000ee;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateY(-150%);
+}
+
 @media only screen and (max-width: 600px) {
   .payment_options {
     grid-template-columns: 1fr;
